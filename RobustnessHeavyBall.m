@@ -30,15 +30,15 @@ lambda = 120; % Gravity.
 gamma = 3/4; % Viscous friction to mass ratio.
 
 % These will need to be tuned:
-eps1 = 0.01; % 0.001
-eps2 = 10; % 0.002 3.15
+eps1 = 0.05; 
+eps2 = 10; 
 
-rho1 = 0.01; % 0.001
-rho2 = 10; % 0.002 3.15
+rho1 = 0.05; 
+rho2 = 10; 
 
 aConst = 10000000;
 
-noiseCoeff = 0.00000000001; % Was 0.08 % was 0.00000000001
+noiseCoeff = 0.00000000001; 
 const = 1;
 initCond = 15.00000000001;
 
