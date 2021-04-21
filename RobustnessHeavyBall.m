@@ -119,7 +119,7 @@ while a_00 == 0
 end
 
 % Assign initial conditions to vector for hybrid heavy ball
-x00 = [z1_00;z2_00;p_00;a_00];
+x00 = [z1_00;z2_00;p_00;a_00;tau_0];
 
 hbfNoise = sigmaHBF*randn(1,1);
 noiseHBF(HBFIndex) = constHBF*(GradientL(z1_00) + sign(GradientL(z1_00))*hbfNoise);
@@ -164,49 +164,8 @@ options = odeset('RelTol',1e-6,'MaxStep',.1);
 [tSA5,jSA5,xSA5] = HyEQsolver(@fSA5,@gSA,@CSA,@DSA,...
     x0,TSPAN,JSPAN,rule,options);
 
-% lSA = zeros(1,length(tSA));
-% for i=1:length(xSA(:,1))
-%     lSA(i) = (CalculateL(xSA(i,1)));
-% end
-% 
-% lSA2 = zeros(1,length(tSA2));
-% for i=1:length(xSA2(:,1))
-%     lSA2(i) = (CalculateL(xSA2(i,1)));
-% end
-% 
-% lSA3 = zeros(1,length(tSA3));
-% for i=1:length(xSA3(:,1))
-%     lSA3(i) = (CalculateL(xSA3(i,1)));
-% end
-
-% lSA4 = zeros(1,length(tSA4));
-% for i=1:length(xSA4(:,1))
-%     lSA4(i) = (CalculateL(xSA4(i,1)));
-% end
-% 
-% lSA5 = zeros(1,length(tSA5));
-% for i=1:length(xSA5(:,1))
-%     lSA5(i) = (CalculateL(xSA5(i,1)));
-% end
-
-% Simulate Heavy ball algorithm (nominal, for now, need to add noise).
 [tH,jH,xH] = HyEQsolver(@f,@g,@C,@D,...
     x00,TSPAN,JSPAN,rule,options);
-
-% lH = zeros(1,length(tH));
-% for i=1:length(xH(:,1))
-%     lH(i) = (CalculateL(xH(i,1)));
-% end
-
-% % Find the jumps for the hybrid plot:
-% for i=2:length(jH)
-%     if(jH(i,1) ~= jH(i-1,1))
-% %         jumpsx1_H(jumpIndex_H) = xH(i,1);
-%         jumpsL1_H(jumpIndex_H) = lH(1,i);
-%         jumpst_H(jumpIndex_H) = tH(i,1);
-%         jumpIndex_H = jumpIndex_H + 1;
-%     end
-% end
 
 figure(1)
 clf

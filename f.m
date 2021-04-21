@@ -15,27 +15,28 @@ function xdot = f(x)
 %   Revision: 0.0.0.3 Date: 05/20/2015 3:42:00
    
 % The global variables
-global lambda gamma sigmaHBF constHBF noiseHBF HBFIndex
+global lambda gamma sigmaHBF constHBF noiseHBF HBFIndex C_0
 
 % state
 z1 = x(1);
 z2 = x(2);
 q = x(3);
 a = x(4);
+tau = x(5);
 
 hbfNoise = sigmaHBF*randn(1,1);
 
 y = [z2 GradientL(z1)];
 
 if (q == 0)
-    u = - lambda*(y(1)) - gamma*(y(2) - constHBF*(y(2) + sign(y(2))*hbfNoise));
+    u = - lambda*(y(1)) - gamma*(y(2) - ((tau*(log(tau))^2)/C_0)*constHBF*(y(2) + sign(y(2))*hbfNoise));
 elseif (q == 1)
     u = a;
 end
 
-noiseHBF(HBFIndex) = constHBF*(y(2) + sign(y(2))*hbfNoise);
+noiseHBF(HBFIndex) = ((tau*(log(tau))^2)/C_0)*constHBF*(y(2) + sign(y(2))*hbfNoise);
 HBFIndex = HBFIndex + 1;
 
-xdot = [z2;u;0;0];
+xdot = [z2;u;0;0;1];
 
 end

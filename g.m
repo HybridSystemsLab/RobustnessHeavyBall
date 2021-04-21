@@ -21,6 +21,7 @@ global aConst
 z1 = x(1);
 z2 = x(2);
 q = x(3);
+tau = x(5);
 
 if(z2 == 0)
     a = 0; 
@@ -32,5 +33,5 @@ else
 end
 
 
-xplus = [z1;z2;1-q;a];
+xplus = [z1;z2;1-q;a;tau];
 end
